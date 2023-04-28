@@ -6,15 +6,6 @@ body {
   line-height: 24px;
 }
 
-/*.visually-hidden:not(:focus):not(:active) {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
-}*/
-
 .computer {
   display: flex;
   flex-direction: column;
@@ -54,11 +45,13 @@ body {
 .display {
   position: relative;
   height: 134px;
+  width: 96%;
   overflow: auto;
   padding: 8px 28px 16px;
   word-wrap: break-word;
   border-radius: 4px;
   background-color: #ffffff;
+  font-size: 24px;
   /*background-color: #2b3755;*/
 }
 
@@ -68,8 +61,7 @@ body {
   top: 14px;
   left: 8px;
   width: 8px;
-  height: 12px;
- 
+  height: 12px; 
 }
 
 .keyboard {
@@ -83,77 +75,26 @@ body {
   flex-shrink: 1;
 }
 
-/*.keyboard-line:nth-child(3) {
-  margin-left: 12.5%;
-  margin-right: 12.5%;
-}*/
-
 .button {
   position: relative;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 7px;  
   font: inherit;
-  color: #fce6ef;
- 
+  color: #fce6ef; 
   border: none;
-  border-radius: 4px;
+  border-radius: 15px;
   background-image: linear-gradient(to bottom, #4d6398, #334266);
-
   margin-right: 5px;
-  margin-bottom: 5px;
-  padding-left: 0;
-  padding-right: 0;
+  margin-bottom: 10px;
   flex-grow: 1;
   font-size: 24px;
   line-height: 26px;
-}
-
-.button::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  padding: 1px;
-  width: 100%;
-  height: 100%;
-  top: -1px;
-  left: -1px;
-  border-radius: 5px;
-  background-image: linear-gradient(to bottom, #1a2133, #222c44);
-}
-
-/*.button.clear {
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-}*/
-
-/*.key,
-.clear {
-  margin-right: 5px;
-  margin-bottom: 5px;
-  padding-left: 0;
-  padding-right: 0;
-  flex-grow: 1;
-  font-size: 24px;
-  line-height: 26px;
-}*/
-
-.tab::after {
-  content: "Tab";
-}
-.space {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; 
+  min-width: 40px;  
   height: 40px;
-  width: 50%;
-}
-
-.space::after {
-  content: "";
-  position: absolute;
-  top: 16px;
- /* left: calc(50% - 20px);*/
-  width: 40px;
-  height: 6px;
- /* background-image: url("img/icon-space.svg");*/
+  cursor: pointer;
+  box-shadow: 0 8px #999;
 }
 
 .button:focus {
@@ -167,5 +108,22 @@ body {
 
 .button:active {
   background-image: none;
-  background-color: #334266;
+  background-color: #334266;  
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.language {
+  margin: auto;
+  width: 30%; 
+}
+
+.space {
+  height: 40px;
+  width: 50%;
+}
+
+.backspace, 
+.enter {
+  width:120px;
 }

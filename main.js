@@ -3,112 +3,177 @@ document.body.append(sectionDisplay);
 sectionDisplay.innerHTML = `<h1 class="visually-hidden">Виртуальная клавиатура</h1>
 <div class="computer">
   <div class="display-wrapper">
-    <div class="display"></div>
-  </div>  
+    <textarea class="display" id="output"></textarea>
+  </div>
+  <button class="button language language-en">EN</button>  
 </div>`;
 
 let sectionKeyboard = document.createElement('section');
 document.body.append(sectionKeyboard);
-sectionKeyboard.innerHTML = `  <div class="keyboard">
-<div class="keyboard-line">
-  <button class="button key" type="button" id="index_0">ё</button>
-  <button class="button key" type="button" id="index_1">1</button>
-  <button class="button key" type="button" id="index_2">2</button>
-  <button class="button key" type="button" id="index_3">3</button>
-  <button class="button key" type="button" id="index_4">4</button>
-  <button class="button key" type="button" id="index_5">5</button>
-  <button class="button key" type="button" id="index_6">6</button>
-  <button class="button key" type="button" id="index_7">7</button>
-  <button class="button key" type="button" id="index_8">8</button>
-  <button class="button key" type="button" id="index_9">9</button>
-  <button class="button key" type="button" id="index_10">0</button>
-  <button class="button key" type="button" id="index_11">-</button>
-  <button class="button key" type="button" id="index_11">=</button>
-  <button class="button clear" type="button">Backspace</button>
-</div>
-
-</div>
-<div class="keyboard-line">
-<button class="button key tab" type="button" id="index_12"> &#160;</button>
-  <button class="button key" type="button" id="index_0">й</button>
-  <button class="button key" type="button" id="index_1">ц</button>
-  <button class="button key" type="button" id="index_2">у</button>
-  <button class="button key" type="button" id="index_3">к</button>
-  <button class="button key" type="button" id="index_4">е</button>
-  <button class="button key" type="button" id="index_5">н</button>
-  <button class="button key" type="button" id="index_6">г</button>
-  <button class="button key" type="button" id="index_7">ш</button>
-  <button class="button key" type="button" id="index_8">щ</button>
-  <button class="button key" type="button" id="index_9">з</button>
-  <button class="button key" type="button" id="index_10">х</button>
-  <button class="button key" type="button" id="index_11">ъ</button>
-</div>
-<div class="keyboard-line">
-<button class="button " type="button" id="index_12">CapsLock</button>
-  <button class="button key" type="button" id="index_12">ф</button>
-  <button class="button key" type="button" id="index_13">ы</button>
-  <button class="button key" type="button" id="index_14">в</button>
-  <button class="button key" type="button" id="index_15">а</button>
-  <button class="button key" type="button" id="index_16">п</button>
-  <button class="button key" type="button" id="index_17">р</button>
-  <button class="button key" type="button" id="index_18">о</button>
-  <button class="button key" type="button" id="index_19">л</button>
-  <button class="button key" type="button" id="index_20">д</button>
-  <button class="button key" type="button" id="index_21">ж</button>
-  <button class="button key" type="button" id="index_22">э</button>
-  <button class="button key" type="button" id="index_23">ё</button>
-  <button class="button enter" type="button" id="index_12">Enter</button>
-</div>
-<div class="keyboard-line">
-<button class="button " type="button" id="index_12">Shift</button>
-  <button class="button key" type="button" id="index_24">я</button>
-  <button class="button key" type="button" id="index_25">ч</button>
-  <button class="button key" type="button" id="index_26">с</button>
-  <button class="button key" type="button" id="index_27">м</button>
-  <button class="button key" type="button" id="index_28">и</button>
-  <button class="button key" type="button" id="index_29">т</button>
-  <button class="button key" type="button" id="index_30">ь</button>
-  <button class="button key" type="button" id="index_31">б</button>
-  <button class="button key" type="button" id="index_32">ю</button>
-  <button class="button key" type="button" id="index_32">.</button>
-  <button class="button key" type="button" id="index_32">▲</button>
-</div>
-<div class="keyboard-line">
-<button class="button " type="button" id="index_12">Ctrl</button>
-<button class="button " type="button" id="index_12">Alt</button>
-  <button class="button key space" type="button" id="index_33"> </button>
-  <button class="button key" type="button" id="index_32">◄</button>
-  <button class="button key" type="button" id="index_32">▼</button>
-  <button class="button key" type="button" id="index_32">►</button>
-</div>
-</div>`;
+sectionKeyboard.innerHTML = `<div class="keyboard" id="keyboard-container"></div>`;
 
 
-let key = document.querySelectorAll('.key');
-let display = document.querySelector('.display');
-let clear = document.querySelector('.clear');
-let enter = document.querySelector('.enter');
+const keyboardContainer = document.getElementById('keyboard-container');
 
 
-for(let k of key){
-k.onclick = function(){ 
-    display.textContent += k.textContent;
+
+
+const keys = [
+  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0','Backspace'],
+  ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+  ['CapsLock','a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Enter'],
+  ['Shift','z', 'x', 'c', 'v', 'b', 'n', 'm', '.' , ',' , '▲',],
+  ['Ctrl','Alt', ' ', '◄' , '▼','►',]   
+];
+
+const keysUp = [
+  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0','Backspace'],
+  ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+  ['CapsLock','A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Enter'],
+  ['Shift','Z', 'X', 'C', 'V', 'B', 'N', 'M', '<' , '>' , '▲',],
+  ['Ctrl','Alt', ' ', '◄' , '▼','►',]   
+];
+
+const keysRu = [
+  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0','Backspace'],
+  ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з'],
+  ['CapsLock','a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Enter'],
+  ['Shift','z', 'x', 'c', 'v', 'b', 'n', 'm', '.' , ',' , '▲',],
+  ['Ctrl','Alt', ' ', '◄' , '▼','►',]   
+];
+
+let languageRuEnabled = false; // индикатор включения языка клавиатуры
+let languageButton = document.querySelector('.language');
+
+languageButton.addEventListener('click', () => {
+  languageRuEnabled = !languageRuEnabled; 
+    //keyboardContainer.innerHTML = '';
+      if (languageRuEnabled) {
+        languageButton.textContent = "RU";
+      } else {
+        languageButton.textContent = "EN";
+      }     
+  
+  console.log("njnk");
+});
+
+
+
+let capsLockEnabled = false; // индикатор включения регистра клавиатуры
+
+const createKeyElement = (key) => {
+  const keyElement = document.createElement('div');
+  keyElement.classList.add('button');
+  keyElement.innerHTML = key;
+
+  if (key === 'Backspace') {
+      keyElement.addEventListener('click', () => {
+      const outputElement = document.getElementById('output');
+      outputElement.value = outputElement.value.slice(0, -1); // Remove last character
+    });
+  } 
+
+  else if (key === 'Enter') {
+    keyElement.classList.add('enter');
+    keyElement.addEventListener('click', () => {
+      const outputElement = document.getElementById('output');
+      outputElement.value += "\n"; // переход на новую строку
+    });
+  } 
+
+  else if (key === 'Tab') {
+      keyElement.addEventListener('click', () => {
+      const outputElement = document.getElementById('output');
+      outputElement.value += ` `;
+      outputElement.value += ` `; // клавиша Tab
+    });
+  } 
+
+  else if (key === 'CapsLock') {
+      keyElement.addEventListener('click', () => {
+      capsLockEnabled = !capsLockEnabled;// изменяем индикатор регистра
+      keyboardContainer.innerHTML = '';
+      if (capsLockEnabled) {
+        createKeyboardUp();        
+      } else {
+        createKeyboard();        
+      }
+      const outputElement = document.getElementById('output');
+      outputElement.value += ``;
+       // клавиша capsLoock
+    });
+  } 
+
+  else if (key === 'Shift'|| key === 'Ctrl'|| key === 'Alt' ) {
+      keyElement.addEventListener('click', () => {
+      const outputElement = document.getElementById('output');
+      outputElement.value += ``;// клавиша shift       
+    });
+  } 
+
+  else if (key === ' ') {
+    keyElement.classList.add('space');
+    keyElement.addEventListener('click', () => {
+      const outputElement = document.getElementById('output');
+      outputElement.value += ` `;// клавиша пробел       
+    });
+  } 
+
+  else {
+      keyElement.addEventListener('click', () => {
+      const outputElement = document.getElementById('output');
+      outputElement.value += key;
+    });
   }
-}  
+  
+  return keyElement;
+};
 
-/*подумать как удалить последний элемент */
-clear.onclick = function(evt){
-  evt.preventDefault();  
-display.textContent = '';
-}
+const createKeyboard = () => {
+  keys.forEach(row => {
+    const rowElement = document.createElement('div');
+    //rowElement.classList.add('row');
+    rowElement.classList.add('keyboard-line');
+    
+    row.forEach(key => {
+      const keyElement = createKeyElement(key);
+      rowElement.appendChild(keyElement);
+    });
+    keyboardContainer.appendChild(rowElement);
+  });
+};
+
+createKeyboard();
+
+const createKeyboardUp = () => {
+  keysUp.forEach(row => {
+    const rowElement = document.createElement('div');
+    rowElement.classList.add('keyboard-line');
+    
+    row.forEach(key => {
+      const keyElement = createKeyElement(key);
+      rowElement.appendChild(keyElement);
+    });
+    keyboardContainer.appendChild(rowElement);
+  });
+};
+
+// обработчики событий для нажатия  клавиши CapsLock на всем документе
+
+document.addEventListener('keydown', function(event) {
+  if (event.getModifierState('CapsLock')) {
+    capsLockEnabled = !capsLockEnabled; 
+    keyboardContainer.innerHTML = '';
+      if (capsLockEnabled) {
+        createKeyboardUp();
+      } else {
+        createKeyboard();
+      }     
+  }
+});
 
 
 
 
-/*
-Кнопки с буквами и «пробел» имеют класс key, а дисплей — класс display.
 
-При клике на кнопку с буквой или пробелом текстовое содержимое этой кнопки должно добавляться к текстовому содержимому дисплея.
 
-Кнопка очистки имеет класс clear. При клике на неё весь текст внутри дисплея должен удаляться, для этого в текстовое содержимое дисплея нужно записать пустую строку.
-*/
