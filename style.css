@@ -1,0 +1,134 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Trebuchet MS", "Helvetica", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.computer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 240px;
+  padding: 16px 10px;
+}
+
+.computer::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 244px;
+  background-color: #3c4d77;
+  border-bottom: 1px solid #222c44;
+}
+
+.computer::after {
+  content: "";
+  position: absolute;
+  top: 202px;
+  left: 10px;
+  width: 162px;
+  height: 23px;
+}
+
+.display-wrapper {
+  border-radius: 6px;
+  margin-bottom: 12px;
+  padding: 4px;
+  background-image: linear-gradient(to bottom, #1a2133, #4d6398);
+}
+
+.display {
+  position: relative;
+  height: 134px;
+  width: 96%;
+  overflow: auto;
+  padding: 8px 28px 16px;
+  word-wrap: break-word;
+  border-radius: 4px;
+  background-color: hsl(0, 0%, 100%);
+  font-size: 24px;  
+}
+
+.display::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 8px;
+  width: 8px;
+  height: 12px; 
+}
+
+.keyboard {
+  padding-right: 5px;
+  padding-left: 10px;
+}
+
+.keyboard-line {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 1;
+}
+
+.text {
+  margin: 20px;
+}
+
+.button {
+  position: relative;
+  padding: 7px;  
+  font: inherit;
+  color: #fce6ef; 
+  border: none;
+  border-radius: 15px;
+  background-image: linear-gradient(to bottom, #4d6398, #334266);
+  margin-right: 5px;
+  margin-bottom: 10px;
+  flex-grow: 1;
+  font-size: 24px;
+  line-height: 26px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; 
+  min-width: 40px;  
+  height: 40px;
+  cursor: pointer;
+  box-shadow: 0 8px #999;
+  transition: 0.5s;
+}
+
+.button:focus {
+  outline: 3px solid rgba(252, 230, 239, 0.3);
+  outline-offset: 1px;
+}
+
+.button:hover {
+  background-image: linear-gradient(to bottom, #677cb2, #455887);
+}
+
+.button:active {
+  background-image: none;
+  background-color: #334266;  
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.language {
+  margin: auto;
+  width: 30%; 
+  transition: 0.5s;
+}
+
+.space {
+  height: 40px;
+  width: 50%;
+}
+
+.backspace, 
+.enter {
+  width:120px;
+}
