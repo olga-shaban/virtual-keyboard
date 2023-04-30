@@ -75,6 +75,10 @@ body {
   flex-shrink: 1;
 }
 
+.text {
+  margin: 20px;
+}
+
 .button {
   position: relative;
   padding: 7px;  

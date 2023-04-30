@@ -10,7 +10,9 @@ sectionDisplay.innerHTML = `<h1 class="visually-hidden">Виртуальная �
 
 let sectionKeyboard = document.createElement('section');
 document.body.append(sectionKeyboard);
-sectionKeyboard.innerHTML = `<div class="keyboard" id="keyboard-container"></div>`;
+sectionKeyboard.innerHTML = `<div class="keyboard" id="keyboard-container"></div>
+<p class="text">Клавиатура создана в операционной системе Windows</p>
+<p class="text"> Для переключения комбинация: нажмите на кнопку на панели</p>`;
 
 
 const keyboardContainer = document.getElementById('keyboard-container');
@@ -63,8 +65,7 @@ languageButton.addEventListener('click', () => {
       } else {        
         languageButton.textContent = "EN";
         createKeyboard();
-      }  
-       
+      }         
 });
 
 
