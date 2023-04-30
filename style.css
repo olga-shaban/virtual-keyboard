@@ -95,6 +95,7 @@ body {
   height: 40px;
   cursor: pointer;
   box-shadow: 0 8px #999;
+  transition: 0.5s;
 }
 
 .button:focus {
@@ -116,6 +117,7 @@ body {
 .language {
   margin: auto;
   width: 30%; 
+  transition: 0.5s;
 }
 
 .space {
